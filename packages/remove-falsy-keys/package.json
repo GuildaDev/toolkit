@@ -1,0 +1,12 @@
+{
+  "name": "@guildadev/remove-falsy-keys",
+  "version": "1.0.10",
+  "type": "module",
+  "typings": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.cjs"
+    }
+  }
+}
