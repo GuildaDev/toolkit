@@ -1,6 +1,6 @@
-import removeFalsyKeys, { removeFalsyKeysImultable } from '.';
+import removeNilKeys, { removeNilKeysImultable } from '.';
 
-describe('removeFalsyKeys', () => {
+describe('removeNilKeys', () => {
   it('should remove keys with falsy values', () => {
     const inputObject = {
       a: 42,
@@ -8,21 +8,25 @@ describe('removeFalsyKeys', () => {
       c: null,
       d: undefined,
       e: 0,
-      f: 'hello'
+      f: 'hello',
+      g: false
     };
 
-    removeFalsyKeys(inputObject);
+    removeNilKeys(inputObject);
 
     expect(inputObject).toEqual({
       a: 42,
-      f: 'hello'
+      b: '',
+      e: 0,
+      f: 'hello',
+      g: false
     });
   });
 
   it('should handle an empty object', () => {
     const inputObject = {};
 
-    removeFalsyKeys(inputObject);
+    removeNilKeys(inputObject);
 
     expect(inputObject).toEqual({});
   });
@@ -34,7 +38,7 @@ describe('removeFalsyKeys', () => {
       c: { nested: 'value' }
     };
 
-    removeFalsyKeys(inputObject);
+    removeNilKeys(inputObject);
 
     expect(inputObject).toEqual({
       a: 42,
@@ -44,7 +48,7 @@ describe('removeFalsyKeys', () => {
   });
 });
 
-describe('removeFalsyKeysImultable', () => {
+describe('removeNilKeysImultable', () => {
   it('should remove keys with falsy values - Imultable', () => {
     const inputObject = {
       a: 42,
@@ -56,12 +60,14 @@ describe('removeFalsyKeysImultable', () => {
     };
     const shallowCopy = { ...inputObject };
 
-    const newObj = removeFalsyKeysImultable(inputObject);
+    const newObj = removeNilKeysImultable(inputObject);
 
     expect(shallowCopy).toEqual(inputObject);
 
     expect(newObj).toEqual({
       a: 42,
+      b: '',
+      e: 0,
       f: 'hello'
     });
   });

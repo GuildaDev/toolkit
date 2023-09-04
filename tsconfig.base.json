@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "remove-falsy-keys": ["packages/remove-falsy-keys/src/index.ts"]
+      "remove-falsy-keys": ["packages/remove-falsy-keys/src/index.ts"],
+      "remove-nil-keys": ["packages/remove-nil-keys/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

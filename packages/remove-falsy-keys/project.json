@@ -18,7 +18,7 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "tsc -p packages/remove-falsy-keys/tsconfig.builder.json --outDir ./dist"
+        "command": "tsc -p packages/remove-falsy-keys/tsconfig.lib.json --emitDeclarationOnly --outDir ./dist"
       },
       "dependsOn": [
         {
