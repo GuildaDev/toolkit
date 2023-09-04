@@ -1,5 +1,5 @@
 {
-  "name": "@guildadev/remove-falsy-keys",
+  "name": "@guildadev/remove-nil-keys",
   "version": "1.0.0",
   "type": "module",
   "typings": "./src/index.d.ts",

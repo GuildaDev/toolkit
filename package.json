@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "test": "nx test remove-falsy-keys",
-    "publish:dev": "nx publish:build:dev remove-falsy-keys",
-    "publish:production": "nx publish:build:dev remove-falsy-keys"
+    "test": "nx run-many --all --target=test",
+    "publish:dev": "nx run-many --all --target=publish:build:dev",
+    "publish:production": "nx run-many --all --target=publish:build:dev"
   },
   "private": true,
   "dependencies": {},
