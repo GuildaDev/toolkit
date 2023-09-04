@@ -83,7 +83,3 @@ b - after bundler add this
 # References
 
 https://nx.dev/packages/js
-
-```
-
-```
