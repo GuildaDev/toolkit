@@ -1,8 +1,16 @@
 {
   "name": "@guildadev/toolkit",
-  "version": "1.0.1",
-  "type": "commonjs",
+  "version": "1.0.2",
+  "private": false,
+  "type": "module",
   "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.cjs"
+    }
+  },
   "dependencies": {
     "@guildadev/remove-falsy-keys": "1.0.0",
     "@guildadev/remove-nil-keys": "1.0.1"
