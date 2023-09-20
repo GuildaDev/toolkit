@@ -39,3 +39,7 @@ testem.log
 Thumbs.db
 storage
 .vscode
+
+# Generated Docusaurus files
+.docusaurus/
+.cache-loader/
