@@ -4,7 +4,7 @@
   "type": "commonjs",
   "main": "./src/index.js",
   "dependencies": {
-    "@guildadev/remove-falsy-keys": "*",
-    "@guildadev/remove-nil-keys": "*"
+    "@guildadev/remove-falsy-keys": "1.0.0",
+    "@guildadev/remove-nil-keys": "1.0.0"
   }
 }
