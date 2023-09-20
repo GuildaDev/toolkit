@@ -1,11 +1,19 @@
-# toolkit
+# Introduction
 
-This library was generated with [Nx](https://nx.dev).
+This package is a wrapper for many useful functions that can be used in your projects.
 
-## Building
+# Installation
 
-Run `nx build toolkit` to build the library.
+yarn add @guidadev/toolkit
 
-## Running unit tests
+# Usage
 
-Run `nx test toolkit` to execute the unit tests via [Jest](https://jestjs.io).
+Here's how you can start using @guidadev/toolkit in your projects:
+
+```typescript
+import { removeFalsyKeys } from '@guidadev/toolkit';
+```
+
+# Documentation
+
+Documentation is working in progress....

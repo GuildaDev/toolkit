@@ -13,7 +13,11 @@
         "tsConfig": "packages/toolkit/tsconfig.lib.json",
         "assets": ["packages/toolkit/*.md"],
         "generatePackageJson": true,
-        "format": ["esm", "cjs"]
+        "format": ["esm", "cjs"],
+        "external": [
+          "@guildadev/remove-nil-keys",
+          "@guildadev/remove-falsy-keys"
+        ]
       }
     },
     "build": {
