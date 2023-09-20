@@ -37,7 +37,7 @@ removeNilKeys(inputObject); // {  a: 42, b: '', e: 0, f: 'hello', g: false }
 You can also use imutable version of this function:
 
 ```typescript
-import { removeNilKeysImultable } from '@guidadev/remove-falsy-keys';
+import { removeNilKeysImultable } from '@guidadev/remove-nil-keys';
 
 const inputObject = {
   a: 42,

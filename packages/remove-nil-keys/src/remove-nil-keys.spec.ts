@@ -1,7 +1,7 @@
 import removeNilKeys, { removeNilKeysImultable } from '.';
 
 describe('removeNilKeys', () => {
-  it('should remove keys with falsy values', () => {
+  it('should remove keys with nil values', () => {
     const inputObject = {
       a: 42,
       b: '',
@@ -31,7 +31,7 @@ describe('removeNilKeys', () => {
     expect(inputObject).toEqual({});
   });
 
-  it('should handle an object with no falsy values', () => {
+  it('should handle an object with no nil values', () => {
     const inputObject = {
       a: 42,
       b: 'hello',
@@ -49,7 +49,7 @@ describe('removeNilKeys', () => {
 });
 
 describe('removeNilKeysImultable', () => {
-  it('should remove keys with falsy values - Imultable', () => {
+  it('should remove keys with nil values - Imultable', () => {
     const inputObject = {
       a: 42,
       b: '',
