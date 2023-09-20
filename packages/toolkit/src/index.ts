@@ -1,12 +1,12 @@
 export {
   default as removeNilKeys,
   removeNilKeysImultable
-} from 'remove-nil-keys';
+} from '@guildadev/remove-nil-keys';
 
 export {
   default as removeFalsyKeys,
   removeFalsyKeysImultable
-} from 'remove-falsy-keys';
+} from '@guildadev/remove-falsy-keys';
 
-export type { removeNilKeysProps } from 'remove-nil-keys';
-export type { RemoveFalsyKeysProps } from 'remove-falsy-keys';
+export type { removeNilKeysProps } from '@guildadev/remove-nil-keys';
+export type { RemoveFalsyKeysProps } from '@guildadev/remove-falsy-keys';

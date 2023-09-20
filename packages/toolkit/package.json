@@ -5,6 +5,6 @@
   "main": "./src/index.js",
   "dependencies": {
     "@guildadev/remove-falsy-keys": "1.0.0",
-    "@guildadev/remove-nil-keys": "1.0.0"
+    "@guildadev/remove-nil-keys": "1.0.1"
   }
 }

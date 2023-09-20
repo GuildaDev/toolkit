@@ -9,7 +9,7 @@
     "build:toolkit": "nx build toolkit",
     "publish:dev": "nx run-many --all --target=publish:build:dev"
   },
-  "private": false,
+  "private": true,
   "dependencies": {},
   "devDependencies": {
     "tslib": "^2.3.0",
