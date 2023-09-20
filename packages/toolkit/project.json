@@ -43,7 +43,7 @@
     "publish:build:prod": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "cd dist/packages/remove-falsy-keys && npm publish --registry https://registry.npmjs.org"
+        "command": "cd dist/packages/remove-falsy-keys && npm publish --access=public --registry https://registry.npmjs.org"
       },
       "dependsOn": [
         {
