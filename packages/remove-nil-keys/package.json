@@ -1,6 +1,7 @@
 {
   "name": "@guildadev/remove-nil-keys",
   "version": "1.0.0",
+  "private": false,
   "dependencies": {},
   "type": "module",
   "typings": "./src/index.d.ts",

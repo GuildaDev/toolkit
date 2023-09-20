@@ -6,10 +6,10 @@
     "test": "nx run-many --all --target=test",
     "lint": "nx run-many --all --target=lint",
     "build": "nx run-many --all --target=build",
-    "publish:dev": "nx run-many --all --target=publish:build:dev",
-    "publish:production": "nx run-many --all --target=publish:build:dev"
+    "build:toolkit": "nx build toolkit",
+    "publish:dev": "nx run-many --all --target=publish:build:dev"
   },
-  "private": true,
+  "private": false,
   "dependencies": {},
   "devDependencies": {
     "tslib": "^2.3.0",

@@ -2,6 +2,7 @@
   "name": "@guildadev/remove-falsy-keys",
   "version": "1.0.0",
   "type": "module",
+  "private": false,
   "typings": "./src/index.d.ts",
   "exports": {
     ".": {

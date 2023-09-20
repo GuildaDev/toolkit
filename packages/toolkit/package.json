@@ -1,0 +1,10 @@
+{
+  "name": "@guildadev/toolkit",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "dependencies": {
+    "@guildadev/remove-falsy-keys": "*",
+    "@guildadev/remove-nil-keys": "*"
+  }
+}
