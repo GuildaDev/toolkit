@@ -1,0 +1,81 @@
+{
+  "name": "get-initials",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/get-initials/src",
+  "projectType": "library",
+  "targets": {
+    "bundler": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/get-initials",
+        "main": "packages/get-initials/src/index.ts",
+        "tsConfig": "packages/get-initials/tsconfig.lib.json",
+        "assets": ["packages/get-initials/*.md"],
+        "generatePackageJson": true,
+        "format": ["esm", "cjs"]
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc -p packages/get-initials/tsconfig.lib.json --emitDeclarationOnly --outDir ./dist"
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "bundler"
+        }
+      ]
+    },
+    "publish:build:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd dist/packages/get-initials && npm publish --registry http://localhost:4873"
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build"
+        }
+      ]
+    },
+    "publish:build:prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd dist/packages/get-initials && npm publish --access=public --registry https://registry.npmjs.org"
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "build"
+        }
+      ]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/get-initials/**/*.ts",
+          "packages/get-initials/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/get-initials/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
