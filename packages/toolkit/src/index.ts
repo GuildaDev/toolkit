@@ -10,3 +10,5 @@ export {
 
 export type { removeNilKeysProps } from '@guildadev/remove-nil-keys';
 export type { RemoveFalsyKeysProps } from '@guildadev/remove-falsy-keys';
+
+export * from '@guildadev/get-initials';

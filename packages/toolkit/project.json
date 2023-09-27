@@ -16,7 +16,8 @@
         "format": ["esm", "cjs"],
         "external": [
           "@guildadev/remove-nil-keys",
-          "@guildadev/remove-falsy-keys"
+          "@guildadev/remove-falsy-keys",
+          "@guildadev/get-initials"
         ]
       }
     },
