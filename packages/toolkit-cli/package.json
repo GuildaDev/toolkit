@@ -1,0 +1,12 @@
+{
+  "name": "@guildadev/cli",
+  "version": "1.0.0",
+  "bin": {
+    "guildadev": "bin/guildadev.mjs"
+  },
+  "private": false,
+  "dependencies": {
+    "enquirer": "^2.4.1",
+    "commander": "^11.0.0"
+  }
+}
