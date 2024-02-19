@@ -1,0 +1,19 @@
+{
+  "name": "@guildadev/deserialize-jsonapi",
+  "version": "1.0.0",
+  "private": false,
+  "dependencies": {
+    "deserialize-json-api": "1.4.0"
+  },
+  "type": "module",
+  "typings": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.cjs"
+    }
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1"
+  }
+}
