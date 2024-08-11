@@ -4,21 +4,21 @@
 # Installation
 
 ´´´bash
-yarn add @guidadev/deserialize-jsonapi
+yarn add @guidadev/jsonapi-to-model
 ´´´
 
 or
 
 ´´´bash
-npm install @guidadev/deserialize-jsonapi
+npm install @guidadev/jsonapi-to-model
 ´´´
 
 # Usage
 
-Here's how you can start using @guidadev/deserialize-jsonapi in your projects:
+Here's how you can start using @guidadev/jsonapi-to-model in your projects:
 
 ```ts
-import { BaseEntity, Entity, Attribute } from '@guildadev/deserialize-jsonapi';
+import { BaseEntity, Entity, Attribute } from '@guildadev/jsonapi-to-model';
 
 
 const response = fetch('/my-awesome-api/user')
@@ -49,3 +49,7 @@ const user = new User(response)
 user.name // Alekinho
 user.email // alekito@email.com
 ```
+
+References:
+
+https://www.typescriptlang.org/docs/handbook/decorators.html

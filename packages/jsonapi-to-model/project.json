@@ -1,7 +1,7 @@
 {
-  "name": "deserialize",
+  "name": "jsonapi-to-model",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/deserialize/src",
+  "sourceRoot": "packages/jsonapi-to-model/src",
   "projectType": "library",
   "targets": {
     "bundler": {
@@ -10,11 +10,11 @@
         "{options.outputPath}"
       ],
       "options": {
-        "outputPath": "dist/packages/deserialize",
-        "main": "packages/deserialize/src/index.ts",
-        "tsConfig": "packages/deserialize/tsconfig.lib.json",
+        "outputPath": "dist/packages/jsonapi-to-model",
+        "main": "packages/jsonapi-to-model/src/index.ts",
+        "tsConfig": "packages/jsonapi-to-model/tsconfig.lib.json",
         "assets": [
-          "packages/deserialize/*.md"
+          "packages/jsonapi-to-model/*.md"
         ],
         "generatePackageJson": true,
         "format": [
@@ -26,7 +26,7 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "tsc -p packages/deserialize/tsconfig.lib.json --emitDeclarationOnly --outDir ./dist"
+        "command": "tsc -p packages/jsonapi-to-model/tsconfig.lib.json --emitDeclarationOnly --outDir ./dist"
       },
       "dependsOn": [
         {
@@ -38,7 +38,7 @@
     "publish:build:dev": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "cd dist/packages/deserialize && npm publish --registry http://localhost:4873"
+        "command": "cd dist/packages/jsonapi-to-model && npm publish --registry http://localhost:4873"
       },
       "dependsOn": [
         {
@@ -50,7 +50,7 @@
     "publish:build:prod": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "cd dist/packages/deserialize && npm publish --access=public --registry https://registry.npmjs.org"
+        "command": "cd dist/packages/jsonapi-to-model && npm publish --access=public --registry https://registry.npmjs.org"
       },
       "dependsOn": [
         {
@@ -66,8 +66,8 @@
       ],
       "options": {
         "lintFilePatterns": [
-          "packages/deserialize/**/*.ts",
-          "packages/deserialize/package.json"
+          "packages/jsonapi-to-model/**/*.ts",
+          "packages/jsonapi-to-model/package.json"
         ]
       }
     },
@@ -77,7 +77,7 @@
         "{workspaceRoot}/coverage/{projectRoot}"
       ],
       "options": {
-        "jestConfig": "packages/deserialize/jest.config.ts",
+        "jestConfig": "packages/jsonapi-to-model/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {

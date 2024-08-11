@@ -1,12 +1,12 @@
 {
-  "name": "@guildadev/deserialize-jsonapi",
+  "name": "@guildadev/jsonapi-to-model",
   "version": "1.0.0",
   "private": false,
-  "dependencies": {
-    "deserialize-json-api": "1.4.0"
-  },
   "type": "module",
   "typings": "./src/index.d.ts",
+  "dependencies": {
+    "reflect-metadata": "0.2.2"
+  },
   "exports": {
     ".": {
       "import": "./index.js",

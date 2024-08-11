@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: "deserialize",
+  displayName: "jsonapi-to-model",
   preset: "../../jest.preset.js",
   testEnvironment: "node",
   transform: {

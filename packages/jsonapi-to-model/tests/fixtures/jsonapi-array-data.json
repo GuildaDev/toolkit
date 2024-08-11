@@ -1,0 +1,118 @@
+{
+    "data": [
+        {
+            "type": "users",
+            "id": "1",
+            "attributes": {
+                "firstName": "John",
+                "lastName": "Doe",
+                "email": "john.doe@example.com",
+                "username": "johndoe"
+            },
+            "relationships": {
+                "photos": {
+                    "data": [
+                        {
+                            "type": "photos",
+                            "id": "1"
+                        },
+                        {
+                            "type": "photos",
+                            "id": "2"
+                        }
+                    ]
+                },
+                "address": {
+                    "data": {
+                        "type": "addresses",
+                        "id": "1"
+                    }
+                }
+            }
+        },
+        {
+            "type": "users",
+            "id": "2",
+            "attributes": {
+                "firstName": "Jane",
+                "lastName": "Smith",
+                "email": "jane.smith@example.com",
+                "username": "janesmith"
+            },
+            "relationships": {
+                "photos": {
+                    "data": [
+                        {
+                            "type": "photos",
+                            "id": "3"
+                        },
+                        {
+                            "type": "photos",
+                            "id": "4"
+                        }
+                    ]
+                },
+                "address": {
+                    "data": {
+                        "type": "addresses",
+                        "id": "2"
+                    }
+                }
+            }
+        }
+    ],
+    "included": [
+        {
+            "type": "photos",
+            "id": "1",
+            "attributes": {
+                "url": "http://example.com/photos/1.jpg",
+                "description": "John's profile picture"
+            }
+        },
+        {
+            "type": "photos",
+            "id": "2",
+            "attributes": {
+                "url": "http://example.com/photos/2.jpg",
+                "description": "John's vacation photo"
+            }
+        },
+        {
+            "type": "photos",
+            "id": "3",
+            "attributes": {
+                "url": "http://example.com/photos/3.jpg",
+                "description": "Jane's profile picture"
+            }
+        },
+        {
+            "type": "photos",
+            "id": "4",
+            "attributes": {
+                "url": "http://example.com/photos/4.jpg",
+                "description": "Jane's pet photo"
+            }
+        },
+        {
+            "type": "addresses",
+            "id": "1",
+            "attributes": {
+                "street": "123 Main St",
+                "city": "Anytown",
+                "state": "CA",
+                "zipCode": "90210"
+            }
+        },
+        {
+            "type": "addresses",
+            "id": "2",
+            "attributes": {
+                "street": "456 Elm St",
+                "city": "Othertown",
+                "state": "TX",
+                "zipCode": "73301"
+            }
+        }
+    ]
+}
