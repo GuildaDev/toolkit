@@ -1,5 +1,8 @@
 # Introduction
 
+The package leverages the best of metaprogramming, allowing direct access to data through an abstract model that represents a database table.
+
+See [.docs/motivation.md](.docs/motivation.md)
 
 # Installation
 
@@ -35,7 +38,7 @@ const response = fetch('/my-awesome-api/user')
 //     },
 // }
 
-@Entity()
+
 class User extends BaseEntity {
   @Attribute()
   name!: string;
@@ -50,6 +53,11 @@ user.name // Alekinho
 user.email // alekito@email.com
 ```
 
-References:
+You can also get metas, array of JSON:API, object member metas
+
+Check more on: [model-object.test.ts](./tests/model-object.test.ts) and [model-arrays.test.ts](./tests/model-arrays.test.ts)
+
+
+# References:
 
 https://www.typescriptlang.org/docs/handbook/decorators.html
