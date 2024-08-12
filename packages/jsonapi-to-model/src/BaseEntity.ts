@@ -7,10 +7,11 @@ import {
 import { AttributeReflector } from "./types";
 
 export class BaseEntity {
-  private _rawPayload: any;
+  #rawPayload: any;
 
   constructor(payload: any) {
-    this._rawPayload = payload;
+    this.#rawPayload = payload;
+
     const properties = Object.getPrototypeOf(this)[kClassMapping];
 
     properties.forEach(
@@ -26,7 +27,7 @@ export class BaseEntity {
     );
   }
 
-  getDataByKind(kind: symbol, objectKey: string) {
+  private getDataByKind(kind: symbol, objectKey: string) {
     switch (kind) {
       case ATTRIBUTE_METADATA_KEY:
         return this.getAttribute(objectKey);
@@ -39,17 +40,75 @@ export class BaseEntity {
     }
   }
 
-  getAttribute(objectKey: string) {
-    return this._rawPayload?.data?.attributes?.[objectKey];
+  private getAttribute(objectKey: string) {
+    if (this.isCollectionMember) {
+      return this.#rawPayload.attributes?.[objectKey];
+    }
+    return this.#rawPayload?.data?.attributes?.[objectKey];
   }
 
-  getMetaAttribute(objectKey: string) {
-    return this._rawPayload?.data?.meta?.[objectKey];
+  private getMetaAttribute(objectKey: string) {
+    if (this.isCollection || this.isCollectionMember) {
+      return this.#rawPayload.meta?.[objectKey];
+    }
+
+    return this.#rawPayload?.data?.meta?.[objectKey];
   }
 
-  getAssociationsIncluded(associationType: string) {
-    return this._rawPayload?.included?.filter(
-      (included: { type: string }) => included.type === associationType,
-    ) || [];
+  protected getAssociationsIncluded(
+    associationType: string,
+    associationIds: string[] = [],
+  ) {
+    if (this.isCollectionMember) {
+      const ids = this.#rawPayload.relationships?.[associationType]?.data.map(
+        // @ts-expect-error - we expect array of relationships
+        (relation) => relation.id,
+      );
+      const proto = Object.getPrototypeOf(this);
+      return proto.getAssociationsIncluded(associationType, ids);
+    }
+
+    const includeds = [];
+
+    for (const included of this.#rawPayload.included) {
+      if (
+        included.type === associationType &&
+        (associationIds.length === 0 || associationIds.includes(included.id))
+      ) {
+        includeds.push(included);
+      }
+    }
+
+    return includeds;
+  }
+
+  private get isCollectionMember() {
+    // eslint-disable-next-line no-prototype-builtins
+    return Object(this.#rawPayload || {}).hasOwnProperty("attributes");
+  }
+
+  protected get isCollection() {
+    return Array.isArray(this.#rawPayload?.data);
+  }
+
+  protected rawPayload() {
+    return this.#rawPayload;
+  }
+
+  get all(): this[] {
+    if (this.isCollection) {
+      return this.#rawPayload?.data.map((data: any) => {
+        // I wanna see you do it in Java
+        const instance =
+          new (this.constructor as new (payload: unknown) => this)(
+            data,
+          );
+        Object.setPrototypeOf(instance, this);
+
+        return instance;
+      }) as this[];
+    }
+
+    return [this];
   }
 }

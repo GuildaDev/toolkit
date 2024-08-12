@@ -9,6 +9,9 @@
                 "email": "john.doe@example.com",
                 "username": "johndoe"
             },
+            "meta": {
+                "admin": true
+            },
             "relationships": {
                 "photos": {
                     "data": [
@@ -39,16 +42,15 @@
                 "email": "jane.smith@example.com",
                 "username": "janesmith"
             },
+            "meta": {
+                "admin": false
+            },
             "relationships": {
                 "photos": {
                     "data": [
                         {
                             "type": "photos",
                             "id": "3"
-                        },
-                        {
-                            "type": "photos",
-                            "id": "4"
                         }
                     ]
                 },
@@ -61,6 +63,10 @@
             }
         }
     ],
+    "meta": {
+        "total": 2,
+        "total_photos": 3
+    },
     "included": [
         {
             "type": "photos",
@@ -84,14 +90,6 @@
             "attributes": {
                 "url": "http://example.com/photos/3.jpg",
                 "description": "Jane's profile picture"
-            }
-        },
-        {
-            "type": "photos",
-            "id": "4",
-            "attributes": {
-                "url": "http://example.com/photos/4.jpg",
-                "description": "Jane's pet photo"
             }
         },
         {
