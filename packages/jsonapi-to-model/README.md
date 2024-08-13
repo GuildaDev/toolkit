@@ -6,15 +6,26 @@ See [.docs/motivation.md](.docs/motivation.md)
 
 # Installation
 
-´´´bash
+```bash
 yarn add @guidadev/jsonapi-to-model
-´´´
+```
 
 or
 
-´´´bash
+```bash
 npm install @guidadev/jsonapi-to-model
-´´´
+```
+
+## Performance
+
+I created a benchmark to compare the performance of deserializing JSON:API data and directly accessing the included data. The results are as follows:
+
+| Benchmark Type      | Total Items | Deserialization Time | Total Time | Get Photos in Included | Photos IDs | Included Length |
+|---------------------|-------------|----------------------|------------|------------------------|------------|-----------------|
+| Deserialize         | 1000        | 70ms                 | 70ms       | 0ms                    | 10877      | 1000            |
+| Model               | 1000        | 0ms                  | 0ms        | 1ms                    | 10877      | 1000            |
+
+Why is the model faster? Because we don't need to parse the entire JSON:API payload. We only need to allocate the object, which is faster than parsing the entire JSON:API payload.
 
 # Usage
 
