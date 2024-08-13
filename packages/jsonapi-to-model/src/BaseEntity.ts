@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import {
   ATTRIBUTE_METADATA_KEY,
   INCLUDED_METADATA_KEY,

@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { ATTRIBUTE_METADATA_KEY, kClassMapping } from "../symbols";
 
 export function Attribute(attributeKey?: string) {

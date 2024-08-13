@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { INCLUDED_METADATA_KEY, kClassMapping } from "../symbols";
 
 export function Included(attributeKey?: string) {

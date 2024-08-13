@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { kClassMapping, METAS_METADATA_KEY } from "../symbols";
 
 export function Meta(metaKey?: string) {

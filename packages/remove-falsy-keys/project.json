@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/remove-falsy-keys/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "bundler": {
       "executor": "@nx/esbuild:esbuild",
@@ -52,29 +53,14 @@
       ]
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "packages/remove-falsy-keys/**/*.ts",
-          "packages/remove-falsy-keys/package.json"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/remove-falsy-keys/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
+        "jestConfig": "packages/remove-falsy-keys/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }
