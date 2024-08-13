@@ -1,6 +1,6 @@
 {
   "name": "@guildadev/jsonapi-to-model",
-  "version": "1.0.16",
+  "version": "1.0.0",
   "private": false,
   "dependencies": {},
   "type": "module",
