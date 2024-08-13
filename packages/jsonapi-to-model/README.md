@@ -20,43 +20,82 @@ npm install @guidadev/jsonapi-to-model
 
 Here's how you can start using @guidadev/jsonapi-to-model in your projects:
 
+
 ```ts
-import { BaseEntity, Entity, Attribute } from '@guildadev/jsonapi-to-model';
+// model/User.ts
+import { Attribute, BaseEntity } from "@guildadev/jsonapi-to-model";
 
-
-const response = fetch('/my-awesome-api/user')
-
-// Response
-// {
-//     data: {
-//     type: "user",
-//     id: "1",
-//     attributes: {
-//         name: 'Alekinho',
-//         email: 'alekito@email.com',
-//       },
-//     },
-// }
-
-
-class User extends BaseEntity {
+export class User extends BaseEntity {
   @Attribute()
-  name!: string;
-
-  @Attribute()
-  email!: string;
+  declare name: string;
 }
 
-const user = new User(response)
+// services/users.ts
+export function useUsersQuery() {
+  return useQuery<User[]>({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const request = await api.get('/user')
+      const data = request.data
+      const user = new User(data);
 
-user.name // Alekinho
-user.email // alekito@email.com
+      return user;
+    },
+  });
+}
+
+export function useUserQuery() {
+  return useQuery<User>({
+    queryKey: ["user", 1],
+    queryFn: async () => {
+      const request = await api.get('/user/1')
+      const data = request.data
+      const user = new User(data);
+
+      return user;
+    },
+  });
+}
+
+
+
+// Component.tsx
+import { useUserQuery } from "@/provider/useUserQuery";
+
+export default function Hello() {
+    const { data: user, isLoading } = useUserQuery();
+  
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+    if (!user) {
+        return <div>User not found</div>;
+    }
+  
+    return <div>Hello, {user.name} </div>;
+}
 ```
+
+in tsconfig, inside compilerOptions, you need add:
+
+```json
+{
+  "experimentalDecorators": true,
+  "useDefineForClassFields": true
+}
+```
+
+Check how we are using in React, NextJS and Angular: https://github.com/GuildaDev/jsonapi-to-model-apps-demo
 
 You can also get metas, array of JSON:API, object member metas
 
 Check more on: [model-object.test.ts](./tests/model-object.test.ts) and [model-arrays.test.ts](./tests/model-arrays.test.ts)
 
+# Limitations
+
+Even though esbuild and Vite 5 allow the use of experimentalDecorators (without reflection support), SWC does not support this feature. To work around this limitation in SWC, you can use internal helpers.
+
+See [limitations](./.docs/limitations.md)
 
 # References:
 

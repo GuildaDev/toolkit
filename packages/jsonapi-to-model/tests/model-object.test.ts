@@ -17,6 +17,14 @@ class Article extends BaseEntity {
   get raw_custom() {
     return this.raw;
   }
+
+  get titleWithoutDecorator() {
+    return this.getAttribute("title");
+  }
+
+  get metaWithoutDecorator() {
+    return this.getMetaAttribute("rating");
+  }
 }
 
 describe("Article Model", () => {
@@ -49,5 +57,17 @@ describe("Article Model", () => {
 
     expect(article.raw).toBe(jsonapiObject);
     expect(article.raw_custom).toBe(jsonapiObject);
+  });
+
+  it("Should get attribute without decorator", () => {
+    const article = new Article(jsonapiObject);
+
+    expect(article.titleWithoutDecorator).toBe("JSON:API paints my bikeshed!");
+  });
+
+  it("Should get meta without decorator", () => {
+    const article = new Article(jsonapiObject);
+
+    expect(article.metaWithoutDecorator).toBe(4.5);
   });
 });
