@@ -70,4 +70,16 @@ describe("Article Model", () => {
 
     expect(article.metaWithoutDecorator).toBe(4.5);
   });
+
+  it("Should allow use at", () => {
+    const article = new Article(jsonapiObject);
+
+    expect(article.at(0)?.views).toBe(1234);
+  });
+
+  it("Should prevent error using at on object", () => {
+    const article = new Article(jsonapiObject);
+
+    expect(article.at(1)).toBeNull();
+  });
 });
