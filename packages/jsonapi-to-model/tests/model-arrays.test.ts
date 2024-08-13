@@ -89,6 +89,12 @@ describe("Article Model", () => {
     expect(users.all[0].photos_quantity).toBeUndefined();
   });
 
+  it("Should information by using at", () => {
+    const users = new User(jsonapiObject);
+
+    expect(users.at(0)?.firstName).toBe("John");
+  });
+
   it("Should get raw", () => {
     const users = new User(jsonapiObject);
 

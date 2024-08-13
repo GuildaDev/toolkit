@@ -90,21 +90,34 @@ export class BaseEntity {
     return Array.isArray(this._rawPayload?.data);
   }
 
+  private constructorBuilder(collection_object: any) {
+    // I wanna see you do it in Java
+    const instance = new (this.constructor as new (payload: unknown) => this)(
+      collection_object,
+    );
+    Object.setPrototypeOf(instance, this);
+
+    return instance;
+  }
+
   public get all(): this[] {
     if (this.isCollection) {
-      return this._rawPayload?.data.map((data: any) => {
-        // I wanna see you do it in Java
-        const instance =
-          new (this.constructor as new (payload: unknown) => this)(
-            data,
-          );
-        Object.setPrototypeOf(instance, this);
-
-        return instance;
-      }) as this[];
+      return this._rawPayload?.data.map((item: any) =>
+        this.constructorBuilder(item)
+      ) as this[];
     }
 
     return [this];
+  }
+
+  public at(index: number): this | null {
+    if (this.isCollection) {
+      return this.constructorBuilder(this._rawPayload?.data[index]);
+    } else if (!this.isCollection && index === 0) {
+      return this;
+    }
+
+    return null;
   }
 
   public get raw() {
