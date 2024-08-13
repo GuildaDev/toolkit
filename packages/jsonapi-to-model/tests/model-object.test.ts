@@ -13,6 +13,10 @@ class Article extends BaseEntity {
 
   @Included()
   declare comments: Array<unknown>;
+
+  get raw_custom() {
+    return this.raw;
+  }
 }
 
 describe("Article Model", () => {
@@ -38,5 +42,12 @@ describe("Article Model", () => {
     const article = new Article(jsonapiObject);
 
     expect(article.comments.length).toBe(2);
+  });
+
+  it("Should get raw", () => {
+    const article = new Article(jsonapiObject);
+
+    expect(article.raw).toBe(jsonapiObject);
+    expect(article.raw_custom).toBe(jsonapiObject);
   });
 });

@@ -28,6 +28,10 @@ class User extends BaseEntity {
 
   @ArrayMeta("total_photos")
   declare photos_quantity: number;
+
+  get raw_custom() {
+    return this.raw;
+  }
 }
 
 describe("Article Model", () => {
@@ -69,5 +73,12 @@ describe("Article Model", () => {
     const users = new User(jsonapiObject);
 
     expect(users.all[0].photos_quantity).toBeUndefined();
+  });
+
+  it("Should get raw", () => {
+    const users = new User(jsonapiObject);
+
+    expect(users.raw).toBe(jsonapiObject);
+    expect(users.raw_custom).toBe(jsonapiObject);
   });
 });
