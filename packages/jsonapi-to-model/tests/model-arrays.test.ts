@@ -17,7 +17,7 @@ class User extends BaseEntity {
   @Included()
   declare photos: Array<unknown>;
 
-  @Included()
+  @Included("address")
   declare addresses: Array<unknown>;
 
   @Meta()
@@ -43,16 +43,30 @@ describe("Article Model", () => {
     expect(user.lastName).toBe("Doe");
     expect(user.email).toBe("john.doe@example.com");
     expect(user.username).toBe("johndoe");
-    expect(user.photos).toHaveLength(2);
-    expect(user.addresses).toHaveLength(2);
 
     user = users.all[1];
     expect(user.firstName).toBe("Jane");
     expect(user.lastName).toBe("Smith");
     expect(user.email).toBe("jane.smith@example.com");
     expect(user.username).toBe("janesmith");
-    expect(user.photos).toHaveLength(1);
-    expect(user.addresses).toHaveLength(2);
+  });
+
+  it("Should get only associated addresses", () => {
+    const users = new User(jsonapiObject);
+    const user = users.all[0];
+    expect(user.addresses).toHaveLength(1);
+
+    const user_b = users.all[1];
+    expect(user_b.addresses).toHaveLength(1);
+  });
+
+  it("Should get only associated photos", () => {
+    const users = new User(jsonapiObject);
+    const user = users.all[0];
+    expect(user.photos).toHaveLength(2);
+
+    const user_b = users.all[1];
+    expect(user_b.photos).toHaveLength(1);
   });
 
   it("Should get meta of array", () => {

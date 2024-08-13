@@ -1,12 +1,12 @@
 {
   "name": "@guildadev/toolkit",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "private": false,
   "type": "module",
   "types": "./src/index.d.ts",
   "dependencies": {
     "@guildadev/get-initials": "1.0.0",
-    "@guildadev/jsonapi-to-model": "1.0.0",
+    "@guildadev/jsonapi-to-model": "1.0.1",
     "@guildadev/remove-falsy-keys": "1.0.0",
     "@guildadev/remove-nil-keys": "1.0.1"
   }

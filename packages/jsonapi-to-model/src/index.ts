@@ -45,12 +45,26 @@ export class BaseEntity {
     associationIds: string[] = [],
   ) {
     if (this.isCollectionMember) {
-      const ids = this._rawPayload.relationships?.[associationType]?.data.map(
-        // @ts-expect-error - we expect array of relationships
-        (relation) => relation.id,
+      let relation_type = "";
+      let relations_ids = [];
+      const association = Object(
+        this._rawPayload.relationships?.[associationType] ?? {},
       );
+
+      if (association.data === undefined) {
+        return [];
+      }
+
+      if (Array.isArray(association.data)) {
+        relation_type = association.data[0].type;
+        relations_ids = association.data.map((relation: any) => relation.id);
+      } else {
+        relation_type = association.data.type;
+        relations_ids = [association.data.id];
+      }
+
       const proto = Object.getPrototypeOf(this);
-      return proto.getAssociationsIncluded(associationType, ids);
+      return proto.getAssociationsIncluded(relation_type, relations_ids);
     }
 
     const includeds = [];
