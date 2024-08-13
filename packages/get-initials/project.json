@@ -3,18 +3,24 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/get-initials/src",
   "projectType": "library",
-  "tags": [],
   "targets": {
     "bundler": {
       "executor": "@nx/esbuild:esbuild",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/packages/get-initials",
         "main": "packages/get-initials/src/index.ts",
         "tsConfig": "packages/get-initials/tsconfig.lib.json",
-        "assets": ["packages/get-initials/*.md"],
+        "assets": [
+          "packages/get-initials/*.md"
+        ],
         "generatePackageJson": true,
-        "format": ["esm", "cjs"]
+        "format": [
+          "esm",
+          "cjs"
+        ]
       }
     },
     "build": {
@@ -54,14 +60,33 @@
       ]
     },
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "packages/get-initials/**/*.ts",
+          "packages/get-initials/package.json"
+        ]
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
-        "jestConfig": "packages/get-initials/jest.config.ts"
+        "jestConfig": "packages/get-initials/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
       }
     }
-  }
+  },
+  "tags": []
 }

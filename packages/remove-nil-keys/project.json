@@ -3,7 +3,6 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/remove-nil-keys/src",
   "projectType": "library",
-  "tags": [],
   "targets": {
     "bundler": {
       "executor": "@nx/esbuild:esbuild",
@@ -54,14 +53,29 @@
       ]
     },
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/remove-nil-keys/**/*.ts",
+          "packages/remove-nil-keys/package.json"
+        ]
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/remove-nil-keys/jest.config.ts"
+        "jestConfig": "packages/remove-nil-keys/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
       }
     }
-  }
+  },
+  "tags": []
 }
