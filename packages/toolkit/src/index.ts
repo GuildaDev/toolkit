@@ -15,3 +15,11 @@ export {
   default as getInitials,
   type getInitialsParam,
 } from "@guildadev/get-initials";
+
+export {
+  ArrayMeta,
+  Attribute,
+  BaseEntity,
+  Included,
+  Meta,
+} from "@guildadev/jsonapi-to-model";
