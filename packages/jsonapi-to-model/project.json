@@ -1,7 +1,7 @@
 {
-  "name": "get-initials",
+  "name": "jsonapi-to-model",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/get-initials/src",
+  "sourceRoot": "packages/jsonapi-to-model/src",
   "projectType": "library",
   "targets": {
     "bundler": {
@@ -10,11 +10,11 @@
         "{options.outputPath}"
       ],
       "options": {
-        "outputPath": "dist/packages/get-initials",
-        "main": "packages/get-initials/src/index.ts",
-        "tsConfig": "packages/get-initials/tsconfig.lib.json",
+        "outputPath": "dist/packages/jsonapi-to-model",
+        "main": "packages/jsonapi-to-model/src/index.ts",
+        "tsConfig": "packages/jsonapi-to-model/tsconfig.lib.json",
         "assets": [
-          "packages/get-initials/*.md"
+          "packages/jsonapi-to-model/*.md"
         ],
         "generatePackageJson": true,
         "format": [
@@ -26,7 +26,7 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "tsc -p packages/get-initials/tsconfig.lib.json --emitDeclarationOnly --outDir ./dist"
+        "command": "tsc -p packages/jsonapi-to-model/tsconfig.lib.json --emitDeclarationOnly --outDir ./dist"
       },
       "dependsOn": [
         {
@@ -38,7 +38,7 @@
     "publish:build:dev": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "cd dist/packages/get-initials && npm publish --registry http://localhost:4873"
+        "command": "cd dist/packages/jsonapi-to-model && npm publish --registry http://localhost:4873"
       },
       "dependsOn": [
         {
@@ -50,7 +50,7 @@
     "publish:build:prod": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "cd dist/packages/get-initials && npm publish --access=public --registry https://registry.npmjs.org"
+        "command": "cd dist/packages/jsonapi-to-model && npm publish --access=public --registry https://registry.npmjs.org"
       },
       "dependsOn": [
         {
@@ -60,16 +60,7 @@
       ]
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
-      "options": {
-        "lintFilePatterns": [
-          "packages/get-initials/**/*.ts",
-          "packages/get-initials/package.json"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
@@ -77,16 +68,8 @@
         "{workspaceRoot}/coverage/{projectRoot}"
       ],
       "options": {
-        "jestConfig": "packages/get-initials/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
+        "jestConfig": "packages/jsonapi-to-model/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

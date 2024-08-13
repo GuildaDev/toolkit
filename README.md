@@ -4,33 +4,21 @@
 
 # Installation
 
-Not available yet
+```bash
+yarn add @guildadev/toolkit
+```
 
 # Usage
 
-Here's how you can start using @guidadev/toolkit in your projects:
+[get-initials](./packages/get-initials/README.md)
 
-```typescript
-import removeFalsyKeys from '@guidadev/toolkit/remove-falsy-keys';
+[remove-falsy-keys](./packages/remove-falsy-keys/README.md)
 
-// or if you want just this package
-// import removeFalsyKeys from '@guidadev/remove-falsy-keys'
+[remove-nil-keys](./packages/remove-nil-keys/README.md)
 
-const inputObject = {
-  a: 42,
-  b: '',
-  c: null,
-  d: undefined,
-  e: 0,
-  f: 'hello',
-};
+[toolkit](./packages/toolkit/README.md)
 
-removeFalsyKeys(inputObject); // { a: 42, f: 'hello' }
-```
-
-# Features
-
-Not available yet
+[jsonapi-to-model](./packages/jsonapi-to-model/README.md)
 
 # Contributing
 
