@@ -1,16 +1,9 @@
 {
   "name": "@guildadev/toolkit",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": false,
   "type": "module",
-  "main": "./src/index.js",
-  "typings": "./src/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./index.js",
-      "require": "./index.cjs"
-    }
-  },
+  "types": "./src/index.d.ts",
   "dependencies": {
     "@guildadev/get-initials": "1.0.0",
     "@guildadev/jsonapi-to-model": "1.0.0",
