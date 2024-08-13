@@ -34,17 +34,6 @@ You may think that it's easier to get a photo doing response->included->filter_b
 
 It's faster, because we have no parse step, but we lose convention, so why not join the convention + directly access ?
 
-## Performance
-
-I created a benchmark to compare the performance of deserializing JSON:API data and directly accessing the included data. The results are as follows:
-
-| Benchmark Type      | Total Items | Deserialization Time | Item Title             | Total Time | Get Photos in Included | Photos IDs |
-|---------------------|-------------|----------------------|------------------------|------------|------------------------|------------|
-| Deserialize         | 1000        | 70ms                 | Gorgeous Granite Car    | 70ms       | 0ms                    | 10877      |
-| Model               | 1000        | 0ms                  | Gorgeous Granite Car    | 0ms        | 1ms                    | 10877      |
-
-Why is the model faster? Because we don't need to parse the entire JSON:API payload. We only need to allocate the object, which is faster than parsing the entire JSON:API payload.
-
 ## The Package
 
 The package leverages the best of metaprogramming, allowing direct access to data through an abstract model that represents a database table.
