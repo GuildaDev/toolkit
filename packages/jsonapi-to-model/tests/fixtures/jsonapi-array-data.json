@@ -25,6 +25,12 @@
                         }
                     ]
                 },
+                "cover": {
+                    "data": {
+                        "type": "cover_photo",
+                        "id": "1e3b3f53cfdaec1d1b8adddb"
+                    }
+                },
                 "address": {
                     "data": {
                         "type": "addresses",
@@ -93,6 +99,16 @@
             }
         },
         {
+            "id": "1e3b3f53cfdaec1d1b8adddb",
+            "type": "cover_photo",
+            "attributes": {
+                "main": true
+            },
+            "links": {
+                "photo_url": "https://generate.cloud/cdn-cgi/imagedelivery/6G1N-_IOty0Iv_mKdGmX1w/c2d7c764-ae8d-4b4e-a25f-97058c89e200"
+            }
+        },
+        {
             "type": "addresses",
             "id": "1",
             "attributes": {
@@ -112,5 +128,8 @@
                 "zipCode": "73301"
             }
         }
-    ]
+    ],
+    "links": {
+        "self": "http://example.com/articles/1"
+    }
 }

@@ -1,5 +1,21 @@
-import { ArrayMeta, Attribute, BaseEntity, Included, Meta } from "../src";
+import {
+  ArrayMeta,
+  Attribute,
+  BaseEntity,
+  Included,
+  Links,
+  Meta,
+} from "../src";
 import jsonapiObject from "./fixtures/jsonapi-array-data.json";
+
+type Cover = {
+  attributes: {
+    main: boolean;
+  };
+  links: {
+    photo_url: string;
+  };
+};
 
 class User extends BaseEntity {
   @Attribute()
@@ -15,10 +31,16 @@ class User extends BaseEntity {
   declare username: string;
 
   @Included()
-  declare photos: Array<unknown>;
+  declare photos: Array<any>;
+
+  @Included()
+  declare cover: Array<any>;
 
   @Included("address")
   declare addresses: Array<unknown>;
+
+  @Links()
+  declare self: string;
 
   @Meta()
   declare admin: boolean;
@@ -31,6 +53,20 @@ class User extends BaseEntity {
 
   get raw_custom() {
     return this.raw;
+  }
+
+  get covers() {
+    return this.find_included_by<Cover>(
+      "cover_photo",
+    );
+  }
+
+  get photo_url() {
+    return this.covers?.at(0)?.links?.photo_url;
+  }
+
+  get link_self() {
+    return this.getAssociationsLinked("self");
   }
 }
 
@@ -100,5 +136,52 @@ describe("Article Model", () => {
 
     expect(users.raw).toBe(jsonapiObject);
     expect(users.raw_custom).toBe(jsonapiObject);
+  });
+
+  it("Should get attribute of association", () => {
+    const users = new User(jsonapiObject);
+    const user = users.at(0);
+    expect(user?.photos.at(0).attributes.url).toBe(
+      "http://example.com/photos/1.jpg",
+    );
+  });
+
+  it("Should get link of association", () => {
+    const users = new User(jsonapiObject);
+    const user = users.at(0);
+    expect(user?.cover.at(0).links.photo_url).toBe(
+      "https://generate.cloud/cdn-cgi/imagedelivery/6G1N-_IOty0Iv_mKdGmX1w/c2d7c764-ae8d-4b4e-a25f-97058c89e200",
+    );
+  });
+
+  it("Should jsonapi links", () => {
+    const users = new User(jsonapiObject);
+    expect(users.self).toBe("http://example.com/articles/1");
+  });
+
+  it("Should jsonapi links via getter", () => {
+    const users = new User(jsonapiObject);
+    expect(users.link_self).toBe("http://example.com/articles/1");
+  });
+
+  it("Should get data by searching manual in included", () => {
+    const users = new User(jsonapiObject);
+    const user = users.at(0);
+
+    expect(user?.photo_url).toBe(
+      "https://generate.cloud/cdn-cgi/imagedelivery/6G1N-_IOty0Iv_mKdGmX1w/c2d7c764-ae8d-4b4e-a25f-97058c89e200",
+    );
+  });
+
+  it("Should get data all covers getting manual", () => {
+    const users = new User(jsonapiObject);
+    const cover = users.covers[0];
+    expect(cover.attributes.main).toBeTruthy();
+  });
+
+  it("Should prevent error getting data by searching manual in included from array", () => {
+    const users = new User(jsonapiObject);
+
+    expect(users?.photo_url).toBe(users.at(0)?.photo_url);
   });
 });

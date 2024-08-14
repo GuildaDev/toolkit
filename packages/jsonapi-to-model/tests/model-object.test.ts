@@ -1,4 +1,4 @@
-import { Attribute, BaseEntity, Included, Meta } from "../src";
+import { Attribute, BaseEntity, Included, Links, Meta } from "../src";
 import jsonapiObject from "./fixtures/jsonapi-object-data.json";
 
 class Article extends BaseEntity {
@@ -13,6 +13,9 @@ class Article extends BaseEntity {
 
   @Included()
   declare comments: Array<unknown>;
+
+  @Links()
+  declare self: string;
 
   get raw_custom() {
     return this.raw;
@@ -81,5 +84,11 @@ describe("Article Model", () => {
     const article = new Article(jsonapiObject);
 
     expect(article.at(1)).toBeNull();
+  });
+
+  it("Should get links ", () => {
+    const article = new Article(jsonapiObject);
+
+    expect(article.self).toBe("http://example.com/articles");
   });
 });

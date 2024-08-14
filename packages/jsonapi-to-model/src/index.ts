@@ -1,7 +1,9 @@
 import {
   ATTRIBUTE_METADATA_KEY,
+  INCLUDED_LINKS_METADATA_KEY,
   INCLUDED_METADATA_KEY,
   kClassMapping,
+  LINKS_METADATA_KEY,
   METAS_METADATA_KEY,
 } from "./symbols";
 import { AttributeReflector } from "./types";
@@ -15,10 +17,13 @@ export class BaseEntity {
     const properties = Object.getPrototypeOf(this)[kClassMapping] ?? [];
 
     properties.forEach(
-      ({ originaKey, mapperKey, kind }: AttributeReflector) => {
+      (
+        { originaKey, mapperKey, kind, includedAssociation }:
+          AttributeReflector,
+      ) => {
         Object.defineProperty(this, mapperKey, {
           get: () => {
-            return this.getDataByKind(kind, originaKey);
+            return this.getDataByKind(kind, originaKey, includedAssociation);
           },
           configurable: true,
           enumerable: true,
@@ -27,7 +32,23 @@ export class BaseEntity {
     );
   }
 
-  private getDataByKind(kind: symbol, objectKey: string) {
+  // ============
+  // protected API
+  // ============
+
+  protected get isCollection() {
+    return Array.isArray(this._rawPayload?.data);
+  }
+
+  // ============
+  // private API
+  // ============
+
+  private getDataByKind(
+    kind: symbol,
+    objectKey: string,
+    includedAssociation?: string,
+  ) {
     switch (kind) {
       case ATTRIBUTE_METADATA_KEY:
         return this.getAttribute(objectKey);
@@ -35,6 +56,13 @@ export class BaseEntity {
         return this.getMetaAttribute(objectKey);
       case INCLUDED_METADATA_KEY:
         return this.getAssociationsIncluded(objectKey);
+      case LINKS_METADATA_KEY:
+        return this.getAssociationsLinked(objectKey);
+      case INCLUDED_LINKS_METADATA_KEY:
+        return this.getAssociationsIncludedLinked(
+          includedAssociation || "",
+          objectKey,
+        );
       default:
         return null;
     }
@@ -81,13 +109,18 @@ export class BaseEntity {
     return includeds;
   }
 
+  private getAssociationsIncludedLinked(
+    includedAssociation: string,
+    associationType: string,
+  ) {
+    return this.getAssociationsIncluded(includedAssociation, []).map(
+      (item: any) => item.links?.[associationType],
+    ).at(0);
+  }
+
   private get isCollectionMember() {
     // eslint-disable-next-line no-prototype-builtins
     return Object(this._rawPayload || {}).hasOwnProperty("attributes");
-  }
-
-  protected get isCollection() {
-    return Array.isArray(this._rawPayload?.data);
   }
 
   private constructorBuilder(collection_object: any) {
@@ -99,6 +132,10 @@ export class BaseEntity {
 
     return instance;
   }
+
+  // ============
+  // Public API
+  // ============
 
   public get all(): this[] {
     if (this.isCollection) {
@@ -124,6 +161,10 @@ export class BaseEntity {
     return this._rawPayload;
   }
 
+  public getAssociationsLinked(associationType: string) {
+    return this._rawPayload.links?.[associationType];
+  }
+
   public getAttribute(objectKey: string) {
     if (this.isCollectionMember) {
       return this._rawPayload.attributes?.[objectKey];
@@ -138,9 +179,37 @@ export class BaseEntity {
 
     return this._rawPayload?.data?.meta?.[objectKey];
   }
+
+  public find_included_by<T = any>(
+    type: string,
+  ): T[] {
+    if (!this.isCollectionMember) {
+      return this.getAssociationsIncluded(type, []) ?? [];
+    }
+
+    let relation_type = "";
+
+    for (const key in this._rawPayload.relationships) {
+      if (this._rawPayload.relationships[key].data.type === type) {
+        relation_type = key;
+        break;
+      }
+    }
+
+    if (!relation_type) {
+      return [];
+    }
+    const relationship_id =
+      this._rawPayload.relationships[relation_type].data.id;
+
+    const result =
+      this.getAssociationsIncluded(relation_type, [relationship_id]) ?? [];
+    return result;
+  }
 }
 
 export { Attribute } from "./decorators/Attributes";
 export { Meta } from "./decorators/Metas";
 export { Included } from "./decorators/Included";
 export { ArrayMeta } from "./decorators/ArrayMetas";
+export { Links } from "./decorators/Linked";

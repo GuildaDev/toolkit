@@ -99,5 +99,8 @@
                 "self": "http://example.com/comments/12"
             }
         }
-    ]
+    ],
+    "links": {
+        "self": "http://example.com/articles"
+    }
 }
