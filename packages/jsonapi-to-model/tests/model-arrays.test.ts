@@ -8,6 +8,15 @@ import {
 } from "../src";
 import jsonapiObject from "./fixtures/jsonapi-array-data.json";
 
+type Cover = {
+  attributes: {
+    main: boolean;
+  };
+  links: {
+    photo_url: string;
+  };
+};
+
 class User extends BaseEntity {
   @Attribute()
   declare firstName: string;
@@ -47,7 +56,7 @@ class User extends BaseEntity {
   }
 
   get covers() {
-    return this.find_included_by<{ links: { photo_url: string } }>(
+    return this.find_included_by<Cover>(
       "cover_photo",
     );
   }
@@ -164,11 +173,11 @@ describe("Article Model", () => {
     );
   });
 
-  // it("Should get data all covers getting manual", () => {
-  //   const users = new User(jsonapiObject);
-  //   const cover = users.covers_included[0];
-  //   expect(cover.attributes.main).toBeTruthy();
-  // });
+  it("Should get data all covers getting manual", () => {
+    const users = new User(jsonapiObject);
+    const cover = users.covers[0];
+    expect(cover.attributes.main).toBeTruthy();
+  });
 
   it("Should prevent error getting data by searching manual in included from array", () => {
     const users = new User(jsonapiObject);
