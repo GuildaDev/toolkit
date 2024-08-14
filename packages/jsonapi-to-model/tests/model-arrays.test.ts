@@ -55,6 +55,10 @@ class User extends BaseEntity {
   get photo_url() {
     return this.covers?.at(0)?.links?.photo_url;
   }
+
+  get link_self() {
+    return this.getAssociationsLinked("self");
+  }
 }
 
 describe("Article Model", () => {
@@ -144,6 +148,11 @@ describe("Article Model", () => {
   it("Should jsonapi links", () => {
     const users = new User(jsonapiObject);
     expect(users.self).toBe("http://example.com/articles/1");
+  });
+
+  it("Should jsonapi links via getter", () => {
+    const users = new User(jsonapiObject);
+    expect(users.link_self).toBe("http://example.com/articles/1");
   });
 
   it("Should get data by searching manual in included", () => {

@@ -118,10 +118,6 @@ export class BaseEntity {
     ).at(0);
   }
 
-  private getAssociationsLinked(associationType: string) {
-    return this._rawPayload.links?.[associationType];
-  }
-
   private get isCollectionMember() {
     // eslint-disable-next-line no-prototype-builtins
     return Object(this._rawPayload || {}).hasOwnProperty("attributes");
@@ -165,6 +161,10 @@ export class BaseEntity {
     return this._rawPayload;
   }
 
+  public getAssociationsLinked(associationType: string) {
+    return this._rawPayload.links?.[associationType];
+  }
+
   public getAttribute(objectKey: string) {
     if (this.isCollectionMember) {
       return this._rawPayload.attributes?.[objectKey];
@@ -204,7 +204,7 @@ export class BaseEntity {
 
     const result =
       this.getAssociationsIncluded(relation_type, [relationship_id]) ?? [];
-    return result.at(0);
+    return result;
   }
 }
 
