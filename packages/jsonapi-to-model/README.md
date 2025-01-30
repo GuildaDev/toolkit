@@ -18,6 +18,9 @@ npm install @guidadev/jsonapi-to-model
 
 ## Performance
 
+![image](https://github.com/user-attachments/assets/f5e9e29a-74da-4141-807a-4fc42ec79d6a)
+
+
 I created a benchmark to compare the performance of deserializing JSON:API data and directly accessing the included data. The results are as follows:
 
 | Data Size       | File Size (MB) | Deserialization Time (ms) | Extract Photos from Deserialized Item (ms) | Model Benchmark Time (ms) | Extract Photos from Model (ms) | Number of Items Processed |
